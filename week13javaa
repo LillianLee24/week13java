@@ -1,0 +1,189 @@
+import javax.swing.*;
+public class multi6 {
+    public static void main(String[] args) {
+        String text = JOptionPane.showInputDialog(null, "Введите сообщение:");
+        System.out.println("Получено сообщение : " + text);
+    }
+}
+
+
+import java.io.*;
+
+public class multi5 {
+    public static void main(String[] args) throws IOException {
+        String filePath = "C://Users/aruza/Desktop/Новая папка/file.txt";
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+        reader.close();
+    }
+}
+
+
+
+
+import java.io.*;
+
+public class multi4 {
+    public static void main(String[] args) throws IOException {
+        String str = "Hello!";
+        FileOutputStream fos = new FileOutputStream("C://Users/aruza/Desktop/Новая папка/file.txt");
+        byte[] buffer = str.getBytes();
+        fos.write(buffer);
+        fos.close();
+    }
+}
+
+
+
+public class multi2 extends Thread {
+    public void run() {
+        for (int i = 1; i < 10; i++) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + " " + i);
+        }
+    }
+    public static void main(String[] args) throws InterruptedException {
+
+        Thread thread1 = new Thread(new MyRunnable());
+        multi2 thread2 = new multi2();
+        thread1.start();
+        thread2.start();
+        thread1.join();
+        thread2.join();
+        System.out.println("Start");
+    }
+}
+class MyRunnable implements Runnable {
+    public void run() {
+        for (int i = 1; i < 10; i++) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + " " + i);
+        }
+    }
+}
+
+
+
+
+
+public class multi1 {
+    public static void main(String[]args){
+        MyThread myThread = new MyThread();
+        myThread.start();
+        System.out.println("Hello from multi1");
+    }
+}
+class MyThread extends Thread{
+    public void run(){
+        for(int i = 0; i < 1000; i ++ ){
+            System.out.println("Hello from MyThread");
+        }
+    }
+}
+
+
+class EggVoice extends Thread {
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            try {
+                sleep(1000);       
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("яйцо!");
+        }
+    }
+}
+public class multi7    
+{
+    static EggVoice mAnotherOpinion;    
+    public static void main(String[] args) {
+        mAnotherOpinion = new EggVoice();    
+        System.out.println("Спор начат...");
+        mAnotherOpinion.start();       
+        for (int i = 0; i < 5; i++) {
+            try {
+                Thread.sleep(1000);        
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("курица!");
+        }
+        if (mAnotherOpinion.isAlive())    
+        {
+            try {
+                mAnotherOpinion.join();   
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Первым появилось яйцо!");
+        } else    
+        {
+            System.out.println("Первой появилась курица!");
+        }
+        System.out.println("Спор закончен!");
+    }
+}
+
+
+
+
+
+class AffableThread extends Thread
+{
+    @Override
+    public void run()	
+    {
+        System.out.println("Привет из побочного потока!");
+    }
+}
+public class multi8{
+    static AffableThread mSecondThread;
+    public static void main(String[] args)
+    {
+        mSecondThread = new AffableThread();	
+        mSecondThread.start();					
+
+        System.out.println("Главный поток завершён...");
+    }
+}
+
+
+
+
+
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class multi10 {
+    public static void main(String[] args) {
+        String fileName = "C://Users/aruza/Desktop/Новая папка/file.txt";
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.err.println("Ошибка при чтении файла: " + e.getMessage());
+        }
+    }
+}
+
+
+
+
